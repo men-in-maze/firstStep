@@ -8,7 +8,7 @@ public class FullscreenTest extends JFrame{
     public FullscreenTest(){
         setTitle("Planet");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        add(new FullScreenApp());
+        
         ImageIcon img = new ImageIcon("planet2.png");
         setIconImage(img.getImage());
     }
@@ -22,8 +22,7 @@ public class FullscreenTest extends JFrame{
 */
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         gd.setFullScreenWindow(gw);
-        System.out.println(gw.getHeight());
-        //высота полноэкранного приложения(1080 для фулhd)
+        gw.add(new FullScreenApp(gw.getHeight(), gw.getWidth()));
         gw.setVisible(true);
     }
 }

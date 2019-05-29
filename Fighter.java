@@ -1,30 +1,32 @@
 package fullscreentest;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.geom.AffineTransform;
+import javax.swing.ImageIcon;
 
-public class spaceShip extends ship{
-    private int spaceShipWidth;
-    private int spaceShipHeight;
-    private Image spaceship, activeSpaceship;
+
+public class Fighter extends ship{
+    private int fighterWidth;
+    private int fighterHeight;
+    private Image fighter, activeFighter;
     private AffineTransform atForImages;
     
-    spaceShip(int screenHeight, int screenWidth, ID type){
-        super(screenWidth/2 - screenWidth/32, screenHeight/2 - screenWidth/32, type);
-        spaceShipWidth = screenWidth/fullhdX;
-        spaceShipHeight = screenWidth/fullhdX;
-        ImageIcon spaceshipOpenFile = new ImageIcon("spaceship.png");
-        spaceship = spaceshipOpenFile.getImage();
-        spaceship = spaceship.getScaledInstance(spaceShipWidth, spaceShipHeight, Image.SCALE_SMOOTH);
-        ImageIcon spaceshipActiveOpenFile = new ImageIcon("activeSpaceship.png");
-        activeSpaceship = spaceshipActiveOpenFile.getImage();
-        activeSpaceship = activeSpaceship.getScaledInstance(spaceShipWidth, spaceShipHeight, Image.SCALE_SMOOTH);
+    public Fighter(int x, int y, ID id, int screenHeight, int screenWidth) {
+        super(x, y, id);
+        fighterWidth = screenWidth/(fullhdX * 3);
+        fighterHeight = screenWidth/(fullhdX * 3 );
+        ImageIcon spaceshipOpenFile = new ImageIcon("fighter.png");
+        fighter = spaceshipOpenFile.getImage();
+        fighter = fighter.getScaledInstance(fighterWidth, fighterHeight, Image.SCALE_SMOOTH);
+        ImageIcon spaceshipActiveOpenFile = new ImageIcon("fighteractive.png");
+        activeFighter = spaceshipActiveOpenFile.getImage();
+        activeFighter = activeFighter.getScaledInstance(fighterWidth, fighterHeight, Image.SCALE_SMOOTH);
     }
     
-    //Mechanics
+    
     @Override
-    public void spaceshipMoveTo(int x, int y){
+    public void spaceshipMoveTo(int x, int y) {
         enterXPointOfShip = x;
         enterYPointOfShip = y;
         shipMoving = true;
@@ -50,9 +52,9 @@ public class spaceShip extends ship{
             }
         }
     }
-    
+
     @Override
-    public void move(){
+    public void move() {
         if(Math.pow(this.x - enterXPointOfShip, 2) + Math.pow(this.y - enterYPointOfShip, 2) > 400 ) {
             int i = 0;
             int j = 0;
@@ -74,36 +76,36 @@ public class spaceShip extends ship{
                 j--;
                 restYImp++;
             }
-            this.x += speedX + i;
-            this.y += speedY + j;
+            x += speedX + i;
+            y += speedY + j;
         }
         else{
-            this.x = enterXPointOfShip;
-            this.y = enterYPointOfShip;
+            x = enterXPointOfShip;
+            y = enterYPointOfShip;
             shipMoving = false;
             restXImp = 0;
             restYImp = 0;
         }
     }
+    
     @Override
-    public void paint(Graphics2D g2d){
-        atForImages = AffineTransform.getTranslateInstance(this.x, this.y);
-        atForImages.rotate(movementAngle, spaceShipWidth/2, spaceShipHeight/2);
+    public void paint(Graphics2D g2d) {
+        atForImages = AffineTransform.getTranslateInstance(x, y);
+        atForImages.rotate(movementAngle + Math.PI / 2, fighterWidth / 2, fighterHeight / 2);
         if(shipActive)
-            g2d.drawImage(activeSpaceship,atForImages,null);
+            g2d.drawImage(activeFighter,atForImages,null);
         else{
-            g2d.drawImage(spaceship,atForImages,null);
+            g2d.drawImage(fighter,atForImages,null);
         }
     }
 
     @Override
     public int getShipWidth() {
-        return spaceShipWidth;
+        return fighterWidth;
     }
 
     @Override
     public int getShipHeight() {
-        return spaceShipHeight;
+        return fighterHeight;
     }
-    
 }

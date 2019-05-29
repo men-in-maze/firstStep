@@ -1,5 +1,2 @@
 # firstStep
-<p>First step of main frame of Game
-inheritance:
-Fighter extends ship extends gameObjext
-Planet entends gameObject(need to extend)</p>
+First step of main frame of Game. Inheritance : Fighter extends ship extends gameObjext, Planet entends gameObject(need to extend)

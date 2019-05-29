@@ -1,5 +1,5 @@
 # firstStep
 First step of main frame of Game
-\ninheritance:
-\nFighter extends ship extends gameObjext
-\nPlanet entends gameObject(need to extend)
+inheritance:
+Fighter extends ship extends gameObjext
+Planet entends gameObject(need to extend)
